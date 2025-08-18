@@ -41,18 +41,19 @@ python fileshred.py <file_path or wildcard> [options]
 | `--verbose`        | Show detailed output during execution                                       |
 | `-h`, `--help`     | Show help message                                                           |
 | `--version`        | Display version and author info                                             |
+| `--man`            | Show manual page                                                            |
 
 ---
 
 ## 📂 Examples
 
-python fileshred.py *.log  
-python fileshred.py secret_*.txt --dry-run  
-python fileshred.py *.txt -s -p 5  
+python fileshred.py \*.log  
+python fileshred.py secret_\*.txt --dry-run  
+python fileshred.py \*.txt -s -p 5  
 python fileshred.py logs/ -r --ext .log --verbose  
-python fileshred.py "**/*.log" -r  
-python fileshred.py "logs/**/*.txt" -r --ext .txt  
-python fileshred.py "*.tmp"
+python fileshred.py "\*\*/\*.log" -r  
+python fileshred.py "logs/\*\*/\*.txt" -r --ext .txt  
+python fileshred.py "\*.tmp"
 
 ---
 
