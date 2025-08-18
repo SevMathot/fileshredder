@@ -159,13 +159,18 @@ def secure_delete(file_path, passes=3, dry_run=False, no_delete=False, chunk_siz
         print("\r                                                                                ") # end line
 
         # clear operations:
-        sys.stdout.write("\033[A")
-        sys.stdout.write("\033[A")
+        sys.stdout.write("\033[A") # move up one line
+        sys.stdout.write("\033[A") 
         if verbose:
             sys.stdout.write("\033[A")
-        print(Fore.LIGHTGREEN_EX + f"✅ Securely destroyed: {file_path}                ")
-        print("")
-        print("")
+
+        if not no_delete:
+            print(Fore.LIGHTGREEN_EX + f"✅ Securely deleted: {file_path}                              ")
+        else:
+            print(Fore.LIGHTGREEN_EX + f"✅ Securely destroyed: {file_path}                            ")
+
+        print("                                                                                ")
+        print("                                                                                ")
         sys.stdout.write("\033[A")
         sys.stdout.write("\033[A")
 
@@ -219,7 +224,7 @@ def print_manual():
 def confirm_deletion(matched_files, dry_run):
     print(Fore.YELLOW + f"The following files will be securely deleted{Fore.WHITE+' (Simulated)'+Fore.YELLOW if dry_run else ''}:")
     for f in matched_files:
-        print(f"  - {f}")
+        print(f"  - {f} ({megabytes(file_size(f))})")
 
     response = input(Fore.LIGHTRED_EX + "\n⚠️ DANGER ZONE ⚠️    " + Fore.LIGHTYELLOW_EX + "Type 'yes' to confirm deletion: > " + Fore.LIGHTRED_EX)
     return response.strip().lower() == "yes"
@@ -384,12 +389,12 @@ def main():
     print("\n")
 
     total_size = sum(Path(f).stat().st_size for f in matched_files)
-    print(f"Total data to shred: {total_size / (1024**2):.2f} MB")
+    print(f"Total data to shred: {megabytes(total_size)}")
 
     total_files = len(matched_files)
 
     for index, file_path in enumerate(matched_files, start=1):
-        print(Fore.CYAN + f"📁 Now deleting file {index} of {total_files}: {file_path}")
+        print(Fore.CYAN + f"📁 Now deleting file {index} of {total_files}: {file_path} ({megabytes(file_size(file_path))})")
         
         if verbose:
             print(Fore.LIGHTBLACK_EX + f"🔍 Processing file: {file_path}")
@@ -407,7 +412,7 @@ def main():
 
     print(f"\nSummary:")
     print(f"  Files processed: {len(matched_files)}")
-    print(f"  Total data shredded: {total_size / (1024**2):.2f} MB")
+    print(f"  Total data shredded: {megabytes(total_size)}")
     print(f"  Mode: {'Dry-run' if dry_run else 'Live'}")
     print(f"  Overwrite pattern: {overwrite_pattern}")
 
@@ -418,9 +423,11 @@ def main():
 
 
 
+def file_size(filepath):
+    return Path(filepath).stat().st_size
 
-
-
+def megabytes(size):
+    return f"{size / (1024**2):.2f} MB"
 
 
 
