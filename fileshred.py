@@ -71,7 +71,7 @@ OPTIONS
         Number of overwrite passes per file (default: 3).
     
     --pattern
-
+        The overwrite pattern to use. (zeros, ones, alternating, random). (default: random)
 
     -r, --recursive
         Enable recursive shredding of directories. Supports '**' wildcards.
