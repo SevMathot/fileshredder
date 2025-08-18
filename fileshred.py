@@ -79,7 +79,10 @@ OPTIONS
     --ext .EXT
         Filter files by extension when shredding directories (e.g., .log, .tmp).
 
-    --verbose
+    --rename-file
+        Renames the file to some random name before deletion
+
+    -v, --verbose
         Display detailed output for each file processed.
 
     -h, --help
@@ -122,7 +125,7 @@ COPYRIGHT
 
 ##########################################################################################################
 
-def secure_delete(file_path, passes=3, dry_run=False, no_delete=False, chunk_size=4096, pattern="random", verbose=False):
+def secure_delete(file_path, passes=3, dry_run=False, no_delete=False, chunk_size=4096, pattern="random", verbose=False, rename_file=False):
     from pathlib import Path
 
     file = Path(file_path)
@@ -167,10 +170,14 @@ def secure_delete(file_path, passes=3, dry_run=False, no_delete=False, chunk_siz
         sys.stdout.write("\033[A")
 
         if not dry_run and not no_delete:
-            random_name = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
-            temp_path = file.with_name(random_name)
-            file.rename(temp_path)
-            os.remove(temp_path)
+            if rename_file:
+                random_name = ''.join(random.choices(string.ascii_letters + string.digits, k=12))
+                temp_path = file.with_name(random_name)
+                file.rename(temp_path)
+                os.remove(temp_path)
+            else:
+                os.remove(file)
+
             if verbose:
                 print(Fore.LIGHTBLACK_EX + f"📝 Securely deleted: {file_path}")
         else:
@@ -255,6 +262,7 @@ def main():
     no_delete = False
     passes = 3
     overwrite_pattern = "random"
+    rename_file=False
     patterns = []
     global CHUNK_SIZE
     verbose = False
@@ -278,8 +286,10 @@ def main():
             no_delete = True
         elif arg in ("-r", "--recursive"):
             recursive = True
-        elif arg == "--verbose":
+        elif arg in ("-v", "--verbose"):
             verbose = True
+        elif arg == "--rename-file":
+            rename_file = True
         elif arg == "--pattern":
             try:
                 overwrite_pattern = args[i + 1].lower()
@@ -314,9 +324,6 @@ def main():
             except (IndexError, ValueError):
                 print(Fore.RED + "❌ Error: You must specify a valid number after --chunk-size.")
                 sys.exit(1)
-        elif arg == "--version":
-            print(f"{NAME} v{VERSION} by {AUTHOR}")
-            sys.exit(0)
         else:
             patterns.append(arg)
         i += 1
@@ -394,7 +401,8 @@ def main():
             no_delete=no_delete,
             chunk_size=CHUNK_SIZE,
             pattern=overwrite_pattern,
-            verbose=verbose
+            verbose=verbose,
+            rename_file=rename_file
         )
 
     print(f"\nSummary:")
