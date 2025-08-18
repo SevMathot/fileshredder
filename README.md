@@ -113,6 +113,13 @@ pip install colorama
 
 ```
 - Now you can use the command 'shred' followed by the options from anywhere on the system to call for the script. (In PowerShell or Bash terminal)
+- One additional note for PowerShell users on Windows:
+  - If the ps1 script is blocked and you can't use the shred command, open a PowerShell session with elevated permissions and execute the command below to allow script execution:
+```
+  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+---
 
 ## 👁️ License
 
