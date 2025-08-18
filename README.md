@@ -86,6 +86,34 @@ pip install colorama
 
 ---
 
+## ℹ️ Installation
+- Git clone the folder somewhere on your system, or download the zip and unzip somwhere.
+  
+- For Windows (Using PowerShell):
+  - Make sure you have all the requirement installed:
+    - Install Python3 from the Microsoft App Store
+    - Run the command "pip install colorama" for the Colorama dependency
+  - Modify the ps1 file (C:\Users\\\<Username\>\\[OneDrive\\]Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1)
+    - (Create the file if it doesn't exist)
+    - Add the following function to the bottom of the file:
+```
+        function shred {
+          python "X:\path\to\fileshred.py" @args
+        }
+```
+- For Linux (Using Bash):  (I'm using Debian based system, other distribution may differ on how to install python3 and colorama)
+  - Run the following commands to install the requirements (as root):
+    - apt install python3-full python3-colorama -y
+    - Check the location of python3 with the command 'which python3' and take note of it. For example /usr/bin/python3
+  - Modify your .bashrc  (command: nano ~/.bashrc) and add the following function to the bottom of the file:
+```
+    shred() {
+      /path/to/python3 /path/to/fileshred.py "$@"
+    }
+
+```
+- Now you can use the command 'shred' followed by the options from anywhere on the system to call for the script. (In PowerShell or Bash terminal)
+
 ## 👁️ License
 
 This project is released under the MIT License.
