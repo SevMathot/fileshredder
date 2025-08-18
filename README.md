@@ -65,10 +65,9 @@ This tool performs irreversible data destruction. Use with caution. The author a
 ## 📦 Requirements
 
 - Python 3.6+
-- `colorama`
+- Colorama library
 
-Install dependencies:
-pip install colorama
+Install dependencies: `pip install colorama`
 
 ---
 
@@ -90,7 +89,7 @@ pip install colorama
 - Git clone the folder somewhere on your system, or download the zip and unzip somwhere.
   
 - For Windows (Using PowerShell):
-  - Make sure you have all the requirement installed:
+  - Make sure you have all the requirements installed:
     - Install Python3 from the Microsoft App Store
     - Run the command "pip install colorama" for the Colorama dependency
   - Modify the ps1 file (C:\Users\\\<Username\>\\[OneDrive\\]Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1)
