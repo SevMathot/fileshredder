@@ -29,19 +29,20 @@ python fileshred.py <file_path or wildcard> [options]
 
 ### Options
 
-| Option             | Description                                                                 |
-|--------------------|-----------------------------------------------------------------------------|
-| `-s`, `--silent`   | Skip confirmation prompt                                                    |
-| `--dry-run`        | Simulate deletion without modifying files                                   |
-| `--no-delete`      | Overwrite file contents but do not remove from filesystem                   |
-| `--chunk-size N`   | Set chunk size in bytes (default: 4096)                                     |
-| `-p`, `--passes N` | Number of overwrite passes (default: 3)                                     |
-| `-r`, `--recursive`| Enable recursive shredding and support for `**` wildcards   (1)             |
-| `--ext .EXT`       | Filter files by extension when shredding directories (e.g., `.log`)  (2)    |
-| `--verbose`        | Show detailed output during execution                                       |
-| `-h`, `--help`     | Show help message                                                           |
-| `--version`        | Display version and author info                                             |
-| `--man`            | Show manual page                                                            |
+| Option             | Description                                                                         |
+|--------------------|-------------------------------------------------------------------------------------|
+| `-s`, `--silent`   | Skip confirmation prompt                                                            |
+| `--dry-run`        | Simulate deletion without modifying files                                           |
+| `--no-delete`      | Overwrite file contents but do not remove from filesystem                           |
+| `--chunk-size N`   | Set chunk size in bytes (default: 4096)                                             |
+| `-p`, `--passes N` | Number of overwrite passes (default: 3)                                             |
+| `-r`, `--recursive`| Enable recursive shredding and support for `**` wildcards   (1)                     |
+| `--ext .EXT`       | Filter files by extension when shredding directories (e.g., `.log`)  (2)            |
+| `--verbose`        | Show detailed output during execution                                               |
+| `--pattern`        | The overwrite pattern to use. (zeros, ones, alternating, random). (default: random) |
+| `-h`, `--help`     | Show help message                                                                   |
+| `--version`        | Display version and author info                                                     |
+| `--man`            | Show manual page                                                                    |
 
 ---
 
