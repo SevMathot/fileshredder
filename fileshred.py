@@ -14,8 +14,6 @@ import sys
 import glob
 import random
 import string
-import sys
-import sys
 from pathlib import Path
 
 from colorama import init, Fore, Style # type: ignore # pip install colorama
